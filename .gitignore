@@ -4,6 +4,9 @@ node_modules/*
 # ...except the symlink to ourselves.
 !node_modules/APP
 
+# ...and the symlink to blee, which we keep around.
+!node_modules/blee
+
 # Compiled JS
 public/bundle.js
 public/bundle.js.map

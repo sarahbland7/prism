@@ -790,6 +790,10 @@ bindings@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
+blee@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/blee/-/blee-1.0.1.tgz#907a2a392fdbb1504a025afa107f8c55d2dfb86e"
+
 block-stream@*:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/block-stream/-/block-stream-0.0.9.tgz#13ebfe778a03205cfe03751481ebb4b3300c126a"
@@ -1093,6 +1097,13 @@ core-js@^2.4.0:
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
+crayola@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/crayola/-/crayola-0.0.1.tgz#8b5143cd6d5a85a60596bd604a99afdb91d16032"
+  dependencies:
+    minimist "^0.2.0"
+    unique-random "^0.1.1"
 
 cross-env@^3.1.2:
   version "3.1.4"
@@ -2312,6 +2323,10 @@ minimatch@^3.0.0, minimatch@^3.0.2:
 minimist@0.0.8, minimist@~0.0.1:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
+
+minimist@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.2.0.tgz#4dffe525dae2b864c66c2e23c6271d7afdecefce"
 
 minimist@^1.2.0:
   version "1.2.0"
@@ -3540,6 +3555,10 @@ uid2@0.0.x:
 undefsafe@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-0.0.3.tgz#ecca3a03e56b9af17385baac812ac83b994a962f"
+
+unique-random@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/unique-random/-/unique-random-0.1.1.tgz#c4ccaabedaab8534e0f54daf5f10743ee5c692ad"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
