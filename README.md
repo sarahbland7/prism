@@ -98,13 +98,16 @@ Look at [`data/colors.json`](./data/colors.json).
 
 Answer these questions:
 
+---
 <details>
-  <summary>*What's the signature of the array? (What types does it contain?)*</summary>
+  <summary><b>What's the shape of the JSON data in seed.js?</b></summary>
   <p>
   It's an array of `{name: String, color: {r: Number, g: Number, b: Number}}`
   </p>
 </details>
+---
 
+---
 <details>
   <summary>
   We can think of this file as relating RGB colors and names. *What's the nature of this relationship? Is it 1:1, 1:many, or many:many?*</summary>
@@ -114,6 +117,7 @@ Answer these questions:
   the same RGB color.
   </p>
 </details>
+---
 
 When modeling our database, we also want to think about how our data will
 be *used*. For Prism, our requirements are:
@@ -126,8 +130,9 @@ be *used*. For Prism, our requirements are:
   - To understand how to handle our multiple color names in a ,
   look at [Working with Arrays, Lists, and Sets](https://firebase.google.com/docs/firestore/solutions/arrays).
 
+---
 <details>
-  <summary>Given this, what's a good structure for our database?</summary>
+  <summary><b>Given this, what's a good structure for our database?</b></summary>
   <p>
   We'll model our colors as a collection, named `colors`, whose fields are:
     - `red: Number`
@@ -142,6 +147,7 @@ be *used*. For Prism, our requirements are:
   for the color referenced there.
   </p>
 </details>
+---
 
 ### 3. Write a seed file
 
