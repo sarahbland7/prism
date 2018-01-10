@@ -103,7 +103,7 @@ Answer these questions:
 <details>
   <summary><b>What's the shape of the JSON data in seed.js?</b></summary>
   <p>
-  It's an array of `{name: String, color: {r: Number, g: Number, b: Number}}`
+  It's an array of <code>{name: String, color: {r: Number, g: Number, b: Number}}</code>
   </p>
 </details>
 
