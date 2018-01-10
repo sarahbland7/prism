@@ -111,7 +111,7 @@ Answer these questions:
 
 <details>
   <summary>
-  We can think of this file as relating RGB colors and names. *What's the nature of this relationship? Is it 1:1, 1:many, or many:many?*</summary>
+  We can think of this file as relating RGB colors and names. <b>What's the nature of this relationship? Is it 1:1, 1:many, or many:many?</b></summary>
   <p>
   It's a *many:many* relationship. If you look carefully at `colors.json`,
   you'll see several different `blue`s, and also several different names for
