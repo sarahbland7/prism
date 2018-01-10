@@ -35,34 +35,46 @@ The other bad (or not-so-great) thing is that you need to sign up for Firebase t
 
 # 0. Set your Firebase account and the tools
 
-Perform these incantations:
+### Set up the Firebase command line tools
 
 ```sh
 npm install
 npx firebase login
 ```
 
-This will pop up a browser. Link Firebase to your Google account,
-then visit [the Firebase console](https://console.firebase.google.com/)
-and create a project.
+This will pop up a browser. Allow Firebase to access your Google account.
 
-Then, prepare the repo:
+### Set up your Firebase project
+
+1. Go to [the Firebase console](https://console.firebase.google.com/)
+   and create a project.
+2. Visit the project's page in the console, and go to `Develop > Database`.
+   You'll be asked to pick between the the Realtime Database and Cloud Firestore. Pick *Try Firestore Beta*
+3. You'll be asked what security mode to start in. Pick *Start in test mode* (this is *not* the default, because it's *insecure*, but it will make our lives easier for the moment).
+
+### Add the Firebase config to your repo
+
+This is just one command:
 
 ```sh
 npm prepare
 ```
 
-This will ask which Firebase project you want to use. Pick the one you just created. The command will add config information to [`fire/setup.js`](./fire/setup.js).
+This will ask which Firebase project you want to use. Pick the one you just created. You can give it any alias you want.
 
-Finally, start your project:
+The command will add config information to [`fire/setup.js`](./fire/setup.js).
+
+### Finally, start your dev server
 
 ```sh
 npm start
 ```
 
-In the future, this is all you'll have to do.
+In the future, this is all you'll have to do to launch the dev server.
 
 # 1. Get acquainted
+
+You can most likely find your app running on [port 8080](http://localhost:8080). It is, as you can see, pretty minimal.
 
 Take a look around this repo---it's a little different than you've seen before.
 
@@ -78,13 +90,69 @@ You might have noticed that, in places, we're importing `~/fire` or `~/App`. If 
 
 [Our webpack config aliases `~`](./webpack.config.js#L16) to mean "the root of the app". This is to avoid the common bug (and readability issue) of having a bunch of `../../../..`s in our `import`. With this alias, you can `import firebase from '~/fire'` anywhere in your app, without worrying about how many `..`s to have in the relative path.
 
-## ~/fire
+## 2. Think about our database structure
 
-You can import the various Firebase APIs from `~/fire`. For instance:
+Read about the [Firestore data model](https://firebase.google.com/docs/firestore/data-model).
 
-```js
-  import firebase, {auth} from '~/fire'
+Look at [`data/colors.json`](./data/colors.json).
 
-  const google = firebase.auth.GoogleAuthProvider
-  auth.signInWithPopup(google)
-```
+Answer these questions:
+
+<details>
+  <summary>*What's the signature of the array? (What types does it contain?)*</summary>
+  <p>
+  It's an array of `{name: String, color: {r: Number, g: Number, b: Number}}`
+  </p>
+</details>
+
+<details>
+  <summary>
+  We can think of this file as relating RGB colors and names. *What's the nature of this relationship? Is it 1:1, 1:many, or many:many?*</summary>
+  <p>
+  It's a *many:many* relationship. If you look carefully at `colors.json`,
+  you'll see several different `blue`s, and also several different names for
+  the same RGB color.
+  </p>
+</details>
+
+When modeling our database, we also want to think about how our data will
+be *used*. For Prism, our requirements are:
+
+- Sort colors by r, g, or b value
+- Sort colors by hue, saturation, and lightness
+  - We'll have to compute HSL from RGB when we seed the database
+- We also need to be able to find all colors with a given name,
+  and attach new names to existing colors.
+  - To understand how to handle our multiple color names in a ,
+  look at [Working with Arrays, Lists, and Sets](https://firebase.google.com/docs/firestore/solutions/arrays).
+
+<details>
+  <summary>Given this, what's a good structure for our database?</summary>
+  <p>
+  We'll model our colors as a collection, named `colors`, whose fields are:
+    - `red: Number`
+    - `green: Number`
+    - `blue: Number`
+    - `hue: Number`
+    - `saturation: Number`
+    - `luminance: Number`
+    - `names: Object of (name -> true)`
+  
+  Each document represents a *unique color*, with all the different *names*
+  for the color referenced there.
+  </p>
+</details>
+
+### 3. Write a seed file
+
+Write code in `fire/seed.js` to seed the database.
+
+Just seed the RGB values at first.
+
+Then, get the HSL seeding working. You'll need to generate hue, saturation, and luminance values for each color. You can use the [`color-functions` npm](https://www.npmjs.com/package/color-functions) to handle this for you.
+
+### More coming soon!
+
+
+
+
