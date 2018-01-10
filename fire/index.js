@@ -6,9 +6,10 @@ setup(firebase)
 
 export default firebase
 export const db = firebase.firestore()
-export const rt = firebase.database()
 export const auth = firebase.auth()
 export const storage = firebase.storage()
+
+window.db = db
 
 // Export your models here. Example:
 export const userById = id => db.collection('users').doc(id)
