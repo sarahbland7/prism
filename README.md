@@ -73,10 +73,10 @@ You'll notice that there's no `server` folder---we don't need one for this proje
 
 There's seed data is in `./data/colors.json`. This is a JSON file describing an array of `{name: String, color: {r: Number, g: Number, b: Number}}`.
 
-## a word about ~
+### a word about ~
 You might have noticed that, in places, we're importing `~/fire` or `~/App`. If you're familiar with Unix, you know `~` as your home directory. That's not what it means here (though it's similar).
 
-[Our webpack config](./webpack.config.js) aliases `~` to mean "the root of the app". This is to avoid the common bug (and readability issue) of having a bunch of `../../../..`s in our `import`. With this alias, you can `import firebase from '~/fire'` anywhere in your app, without worrying about how many `..`s to have in the relative path.
+[Our webpack config aliases `~`](./webpack.config.js#L16) to mean "the root of the app". This is to avoid the common bug (and readability issue) of having a bunch of `../../../..`s in our `import`. With this alias, you can `import firebase from '~/fire'` anywhere in your app, without worrying about how many `..`s to have in the relative path.
 
 ## ~/fire
 
