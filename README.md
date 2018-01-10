@@ -137,17 +137,18 @@ be *used*. For Prism, our requirements are:
 <details>
   <summary><b>Given this, what's a good structure for our database?</b></summary>
   <p>
-  We'll model our colors as a collection, named `colors`, whose fields are:
-    - `red: Number`
-    - `green: Number`
-    - `blue: Number`
-    - `hue: Number`
-    - `saturation: Number`
-    - `luminance: Number`
-    - `names: Object of (name -> true)`
-  
-  Each document represents a *unique color*, with all the different *names*
-  for the color referenced there.
+    We'll model our colors as a collection, named <code>colors</code>, whose fields are:
+    <ul>
+      <li><code>red: Number</code></li>
+      <li><code>green: Number</code></li>
+      <li><code>blue: Number</code></li>
+      <li><code>hue: Number</code></li>
+      <li><code>saturation: Number</code></li>
+      <li><code>luminance: Number</code></li>
+      <li><code>names: Object of (name -> true)</code></li>
+    </ul>
+    
+    Each document represents a <b>unique color</b>, with all the different <b>names</b> for the color referenced there.
   </p>
 </details>
 
