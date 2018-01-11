@@ -154,14 +154,111 @@ be *used*. For Prism, our requirements are:
 
 ### 3. Write a seed file
 
-Write code in `fire/seed.js` to seed the database.
+Read about how to [add data to Firebase](https://firebase.google.com/docs/firestore/manage-data/add-data).
 
-Just seed the RGB values at first.
+Then, write code in `fire/seed.js` to seed the database.
 
-Then, get the HSL seeding working. You'll need to generate hue, saturation, and luminance values for each color. You can use the [`color-functions` npm](https://www.npmjs.com/package/color-functions) to handle this for you.
+Remember that we want each document in the `colors` collection to
+represent a particular RGB color. We also want these documents to
+be unique. That is, there should be only *one* document for a particular
+color.
 
-### More coming soon!
+<details>
+  <summary><b>How do we ensure our colors are unique?</b></summary>
+  You can create documents with a particular ID. For the seed data,
+  let's use the RGB hex value as the document ID. Example for a single
+  color:
 
+  <code>
+    db.collection('colors').doc('FF00FF').set({
+      red: 255,
+      green: 0,
+      blue: 255,
+      'names.fuchsia': true,
+    }, {merge: true})
+  </code>
+  You can use the `rgb2hex` function from the [`color-functions` npm](https://www.npmjs.com/package/color-functions) to handle getting the hex
+  string from an rgb color for you.
+</details>
 
+Next, get the HSL seeding working. You'll need to generate hue, saturation, and luminance values for each color. You can use the [`color-functions` npm](https://www.npmjs.com/package/color-functions) to handle this for you.
 
+### 4. Write basic views
+
+Let's make [`App.jsx`](./App.jsx) show us all the colors in the database.
+
+"Show all the <X> in the database" is, as you might expect, not the
+best strategy for a full production app. We'll eventually need to use
+[pagination](https://firebase.google.com/docs/firestore/query-data/query-cursors)
+to keep the browser from trying to load too much stuff at once.
+
+But for now, let's just go with it.
+
+Read about [how to get data from Firestore](https://firebase.google.com/docs/firestore/query-data/get-data),
+and think about how React components handle loading data.
+
+---
+
+<details>
+  <summary><b>What methods does Firestore have to give us data?</b></summary>
+  <p>
+    We can use <code>get</code> and <code>onSnapshot</code>.
+
+    In this app, we're going to be using <code>onSnapshot</code>
+    to listen for changes to the database, and update our components
+    when it changes.    
+  </p>
+</details>
+
+---
+
+<details>
+  <summary><b>When will we call this method?</b></summary>
+  <p>
+    We'll call it in the React lifecycle method
+    <code>componentDidMount</code>.
+  </p>
+</details>
+
+---
+
+<details>
+  <summary><b>Example code</b></summary>
+  <code>
+    <pre>
+    export default class Colors extends React.Component {
+      componentDidMount() {
+        this.unsubscribe =
+          db.collection('colors')
+            .onSnapshot(snap =>
+              this.setState({
+                colors: snap.docs.map(doc => doc.data())
+              }))
+      }
+
+      componentWillUnmount() {
+        this.unsubscribe()
+      }
+
+      render() {
+        if (!this.state) return 'Loading...'
+        const {colors} = this.state
+        return <div style={{
+          display: 'flex',
+          flexFlow: 'row wrap',
+        }}> {
+          colors.map(color => <div style={{
+            width: '250px',
+            height: '250px',
+            margin: '9px',
+            backgroundColor: rgb(color)
+          }}>
+          <pre>{JSON.stringify(color.names, 0, 2)}</pre>
+          </div>)
+        } </div>
+      }
+    }
+
+    const rgb = color => `rgb(${color.red}, ${color.green}, ${color.blue})`
+</details>
 
