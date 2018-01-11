@@ -90,7 +90,7 @@ You might have noticed that, in places, we're importing `~/fire` or `~/App`. If 
 
 [Our webpack config aliases `~`](./webpack.config.js#L16) to mean "the root of the app". This is to avoid the common bug (and readability issue) of having a bunch of `../../../..`s in our `import`. With this alias, you can `import firebase from '~/fire'` anywhere in your app, without worrying about how many `..`s to have in the relative path.
 
-## 2. Think about our database structure
+# 2. Think about our database structure
 
 Read about the [Firestore data model](https://firebase.google.com/docs/firestore/data-model).
 
@@ -152,7 +152,7 @@ be *used*. For Prism, our requirements are:
   </p>
 </details>
 
-### 3. Write a seed file
+# 3. Write a seed file
 
 Read about how to [add data to Firebase](https://firebase.google.com/docs/firestore/manage-data/add-data).
 
@@ -183,7 +183,7 @@ color.
 
 Next, get the HSL seeding working. You'll need to generate hue, saturation, and luminance values for each color. You can use the [`color-functions` npm](https://www.npmjs.com/package/color-functions) to handle this for you.
 
-### 4. Write basic views
+# 4. Write basic views
 
 Let's make [`App.jsx`](./App.jsx) show us all the colors in the database.
 
