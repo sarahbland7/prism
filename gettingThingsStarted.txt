@@ -1,0 +1,16 @@
+NOTES ON SERVERS/ COOKIES:
+- how do you add some sense of state ON TOP of stateless server
+- cookie = small piece of text; tool for allowing server to track information about the user
+- GENERAL HTTP process is to send a request on client-side through “the internet” to the server; the server sends a response
+- COOKIE HTTP process is to send a request on client-side through “the internet” to the server; the server sends a response WITH a cookie, which is maintained on client-side // subsequent requests will include the cookie s.t. server now has information about the client this time around (& can therefore serve differently)
+- a cookie is bound to a domain s.t. a cookies are server-specific 
+- RESULTS: nice because we don’t have to authenticate every time; not nice because the server now gets to track some things that you don’t want it to track
+- signing in anonymously MEANS we can’t get information back on another computer bc it was anonymous 
+
+FIREBASE:
+“Firebase is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.”
+- provides mechanism for tokens that distinguish “me” from “you”
+- if a user is unidentified, there’s a way to sign them in anonymously (i.e. auth.onAuthStateChanged)
+
+CODING:
+- spread operator = take all the data in this object & store it in another object
