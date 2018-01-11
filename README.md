@@ -261,4 +261,3 @@ and think about how React components handle loading data.
 
     const rgb = color => `rgb(${color.red}, ${color.green}, ${color.blue})`
 </details>
-
